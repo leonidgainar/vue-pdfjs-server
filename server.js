@@ -20,7 +20,7 @@ app.all('*', function(req, res, next) {
 app.post("/send_data", upload.single('data'), (req, res, next) => {
     const json = JSON.parse(req.body.data);
     console.log(json);
-    fs.writeFile('uploads/jsonfile.json', JSON.stringify(json), 'utf8', (err) => {
+    fs.writeFile('uploads/data.json', JSON.stringify(json), 'utf8', (err) => {
         if (err) throw err;
         console.log('The file has been saved!');
     });
@@ -28,7 +28,7 @@ app.post("/send_data", upload.single('data'), (req, res, next) => {
 });
 
 app.get("/get_data", (req, res, next) => {
-    fs.readFile('uploads/jsonfile.json', 'utf8', (err, data) => {
+    fs.readFile('uploads/data.json', 'utf8', (err, data) => {
         console.log(data);
         if (err) throw err;
         res.json(JSON.parse(data));
